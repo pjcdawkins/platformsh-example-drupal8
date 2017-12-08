@@ -22,15 +22,27 @@ relationships:
 # The size of the persistent disk of the application (in MB).
 disk: 2048
 
-# The 'mounts' describe writable, persistent filesystem mounts in the application. The keys are
-# directory paths, relative to the application root. The values are strings such as
-# 'shared:files/PATH', where PATH is a relative path under the mount's source directory.
+# The 'mounts' describe writable filesystem mounts in the application.
+# The keys are directory paths, relative to the application root (which is
+# also the home directory of the app). The 'source' is the type of storage,
+# which for now is always 'local', a persistent per-environment filesystem.
+# The local source requires a 'source_path', a relative path.
 mounts:
-    '/web/sites/default/files': 'shared:files/files'
-    '/tmp': 'shared:files/tmp'
-    '/private': 'shared:files/private'
-    '/.drush': 'shared:files/.drush'
-    '/drush-backups': 'shared:files/drush-backups'
+    'web/sites/default/files':
+        source: local
+        source_path: 'public'
+    'tmp':
+        source: local
+        source_path: 'tmp'
+    'private':
+        source: local
+        source_path: 'private'
+    '.drush/cache':
+        source: local
+        source_path: 'drush/cache'
+    'drush-backups':
+        source: local
+        source_path: 'drush/backups'
 
 # Configuration of the build of this application.
 build:
