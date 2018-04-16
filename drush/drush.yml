@@ -6,4 +6,4 @@ drush:
   paths:
     config:
       # The path is relative to the Drupal root.
-      - ../private/drush.yml
+      - ../.drush/drush.yml

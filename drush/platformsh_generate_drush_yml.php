@@ -2,7 +2,7 @@
 <?php
 /**
  * @file
- * A script that creates the $HOME/private/drush.yml file.
+ * A script that creates the .drush/drush.yml file.
  */
 
 // This file should only be executed as a PHP-CLI script.
@@ -13,7 +13,7 @@ if (PHP_SAPI !== 'cli') {
 require __DIR__ . '/platformsh_drush.inc';
 
 $appRoot = dirname(__DIR__);
-$filename = $appRoot . '/private/drush.yml';
+$filename = $appRoot . '/.drush/drush.yml';
 
 $siteUrl = _platformsh_drush_site_url();
 
