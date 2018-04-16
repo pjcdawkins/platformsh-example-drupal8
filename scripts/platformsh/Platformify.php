@@ -25,6 +25,11 @@
  *   projects and should generally not be updated. It maps Platform.sh's
  *   environment variables to Drupal database credentials, $settings, and so
  *   forth.
+ * - scripts/platformsh/dist.drush.yml,
+ *   scripts/platformsh/dist.platformsh_drush.inc,
+ *   scripts/platformsh/dist.platformsh_generate_drush_yml.php, and
+ *   scripts/platformsh/dist.drushrc.php, which are all involved in configuring
+*    Drush.
  * - .platform.app.yaml and .platform/*, which provide the Platform.sh-endorsed
  *   example configuration for a Drupal 8 site.
  *
@@ -53,6 +58,7 @@ class Platformify {
     static::useDrupalOrgRepository();
     static::composerUpdate();
     static::copySettingsFiles();
+    static::copyDrushFiles();
   }
 
   /**
@@ -69,6 +75,17 @@ class Platformify {
     copy(static::getProjectRoot() . '/scripts/platformsh/dist.settings.php', static::getProjectRoot() . '/web/sites/default/settings.php');
     copy(static::getProjectRoot() . '/scripts/platformsh/dist.settings.platformsh.php', static::getProjectRoot() . '/web/sites/default/settings.platformsh.php');
   }
+
+  /**
+   * Copy Drush configuration files into place.
+   */
+  protected static function copyDrushFiles() {
+    copy(static::getProjectRoot() . '/scripts/platformsh/dist.drushrc.php', static::getProjectRoot() . '/web/sites/default/drushrc.php');
+    copy(static::getProjectRoot() . '/scripts/platformsh/dist.drush.yml', static::getProjectRoot() . '/drush/drush.yml');
+    copy(static::getProjectRoot() . '/scripts/platformsh/dist.platformsh_drush.inc', static::getProjectRoot() . '/drush/platformsh_drush.inc');
+    copy(static::getProjectRoot() . '/scripts/platformsh/dist.platformsh_generate_drush_yml.php', static::getProjectRoot() . '/drush/platformsh_generate_drush_yml.php');
+  }
+
 
   /**
    * Adds necessary patches to the composer.json file.
