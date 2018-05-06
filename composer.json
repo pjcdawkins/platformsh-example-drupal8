@@ -68,6 +68,9 @@
             "web/themes/contrib/{$name}": [
                 "type:drupal-theme"
             ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
             "drush/contrib/{$name}": [
                 "type:drupal-drush"
             ]
